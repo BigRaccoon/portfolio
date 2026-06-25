@@ -1,0 +1,27 @@
+@startuml
+autoactivate on
+
+actor User
+
+participant "Booking Service" as BS
+participant "Identity Provider" as IdP
+
+User -> BS : ВыполнитьАутентификацию()
+
+BS -> IdP : ПроверитьУчетныеДанные()
+
+alt Учетные данные корректны
+
+    IdP --> BS : ТокенДоступа
+
+    BS --> User : АутентификацияУспешна
+
+else Учетные данные некорректны
+
+    IdP --> BS : ОшибкаАутентификации
+
+    BS --> User : ОтказВДоступе
+
+end
+
+@enduml

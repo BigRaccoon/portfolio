@@ -1,0 +1,34 @@
+@startuml
+
+entity Пользователь {
+    * id : UUID
+    --
+    имя : varchar
+    email : varchar
+    роль : varchar
+    датаСоздания : timestamp
+}
+
+entity Комната {
+    * id : UUID
+    --
+    название : varchar
+    вместимость : integer
+    статус : varchar
+}
+
+entity Бронирование {
+    * id : UUID
+    --
+    пользовательId : UUID
+    комнатаId : UUID
+    датаНачала : timestamp
+    датаОкончания : timestamp
+    статус : varchar
+    датаСоздания : timestamp
+}
+
+Пользователь ||--o{ Бронирование : создает
+Комната ||--o{ Бронирование : резервируется
+
+@enduml
