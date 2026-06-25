@@ -1,0 +1,24 @@
+@startuml
+autoactivate on
+
+actor User
+participant "Booking Service" as BS
+database "PostgreSQL" as DB
+
+User -> BS : searchAvailableRooms(date,time,capacity)
+
+BS -> DB : getAvailableRooms(date,time,capacity)
+
+DB --> BS : availableRooms
+
+alt Rooms found
+
+    BS --> User : availableRooms
+
+else No rooms found
+
+    BS --> User : noAvailableRooms
+
+end
+
+@enduml
